@@ -6,4 +6,5 @@ setup(
    description='Wrapper for Selenium Webdriver',
    author='Fedor Nesterovich',
    author_email='fnesterovich@mfsadmin.com',
+   packages=['selenium_wrapper'],  #same as name
 )
