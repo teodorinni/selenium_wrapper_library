@@ -7,8 +7,8 @@ from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
-from framework.ui.webdriver.WebDriverSingleton import WebDriverSingleton
-from libs.python.generic import get_control_or_command_for_current_os
+from selenium_wrapper.webdriver.WebDriverSingleton import WebDriverSingleton
+from selenium_wrapper.generic import (get_control_or_command_for_current_os)
 
 
 class WrappedElement:

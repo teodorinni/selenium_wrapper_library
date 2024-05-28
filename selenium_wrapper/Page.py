@@ -6,7 +6,7 @@ from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-from framework.ui.webdriver.WebDriverSingleton import WebDriverSingleton
+from selenium_wrapper.webdriver.WebDriverSingleton import WebDriverSingleton
 
 
 class Page:

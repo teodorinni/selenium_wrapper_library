@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 
-from framework.ui.element.WrappedElement import WrappedElement
+from selenium_wrapper.element.WrappedElement import WrappedElement
 
 
 class Element:
