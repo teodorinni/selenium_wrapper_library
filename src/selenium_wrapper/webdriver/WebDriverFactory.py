@@ -9,7 +9,6 @@ from webdriver_manager.firefox import GeckoDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-from definitions import ROOT_DIR
 
 os.environ['WDM_SSL_VERIFY'] = '0'
 os.environ['WDM_LOCAL'] = '1'
@@ -22,7 +21,7 @@ class WebDriverFactory:
     @staticmethod
     def get_web_driver():
         browser = get_browser().lower()
-        if browser == "chrome":
+        if browser == "chrome" or not browser:
             options = webdriver.ChromeOptions()
             options.add_argument("--disable-blink-features=AutomationControlled")
             driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
