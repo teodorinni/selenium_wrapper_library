@@ -20,10 +20,11 @@ class WebDriverFactory:
 
     @staticmethod
     def get_web_driver():
-        if not get_browser():
-            browser = get_browser().lower()
-        else:
-            browser = None
+        browser = get_browser()
+        try:
+            browser = browser.lower()
+        except AttributeError:
+            pass
         if browser == "chrome" or not browser:
             options = webdriver.ChromeOptions()
             options.add_argument("--disable-blink-features=AutomationControlled")
