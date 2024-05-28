@@ -1,4 +1,4 @@
-from selenium_wrapper.webdriver.WebDriverFactory import WebDriverFactory
+from src.selenium_wrapper.webdriver.WebDriverFactory import WebDriverFactory
 
 
 class WebDriverSingleton:
