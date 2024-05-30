@@ -55,6 +55,10 @@ class Page:
         logging.info(f"Making screenshot of the page with URL: {self.get_url()}. Saving the screenshot to {file_path}")
         return self.__driver.get_screenshot_as_file(file_path)
 
+    def make_screenshot_as_png(self):
+        logging.info(f"Making screenshot of the page with URL as PNG: {self.get_url()}")
+        return self.__driver.get_screenshot_as_png()
+
     def get_url(self):
         logging.info("Getting the URL of the current page")
         return self.__driver.current_url
