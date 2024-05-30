@@ -128,7 +128,8 @@ class WrappedElement:
         logging.info(f"Clearing the text from the Element located by {self.__by}: '{self.__locator}'")
 
     def send_keys(self, *text):
-        self.wait_for_presence().send_keys(*text)
+        self.wait_for_presence()
+        self.__get_web_element().send_keys(*text)
         logging.info(f"Typing text: '{''.join(text)}' into the Element located by {self.__by}: '{self.__locator}'")
 
     def switch_frame(self):
