@@ -20,16 +20,15 @@ class WebDriverFactory:
 
     @staticmethod
     def get_web_driver():
-        browser = get_browser()
-        try:
-            browser = browser.lower()
-        except AttributeError:
-            pass
+        browser = _get_env_transformed("BROWSER")
+        headless = _get_env_transformed("HEADLESS")
         if browser == "chrome" or not browser:
             options = webdriver.ChromeOptions()
             options.add_argument("--disable-blink-features=AutomationControlled")
-            driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()),
-                                      options=options)
+            options.add_experimental_option("prefs", {"download.default_directory": os.getenv("DOWNLOAD_DIR")})
+            if headless in ("true",  "1", "yes", "on", "enabled"):
+                options.add_argument("--headless=new")
+            driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
         elif browser == "firefox":
             driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
         elif browser == "edge":
@@ -39,5 +38,10 @@ class WebDriverFactory:
         return driver
 
 
-def get_browser():
-    return os.getenv("BROWSER")
+def _get_env_transformed(env_var):
+    env_var = os.getenv(env_var)
+    try:
+        env_var = env_var.lower()
+    except AttributeError:
+        pass
+    return env_var

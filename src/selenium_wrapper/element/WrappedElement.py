@@ -120,7 +120,7 @@ class WrappedElement:
 
     def send_keys(self, *text):
         self.wait_for_presence().send_keys(*text)
-        logging.info(f"Typing text: '{text}' into the Element located by {self.__by}: '{self.__locator}'")
+        logging.info(f"Typing text: '{''.join(text)}' into the Element located by {self.__by}: '{self.__locator}'")
 
     def switch_frame(self):
         self.__driver.switch_to.frame(self.__get_web_element())
