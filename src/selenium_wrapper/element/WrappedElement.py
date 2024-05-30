@@ -342,3 +342,7 @@ class WrappedElement:
     def wait_for_visibility_and_click(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
         self.wait_for_visibility(timeout)
         self.click()
+
+    def wait_until_clickable_and_click(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+        self.wait_until_clickable(timeout)
+        self.click()
