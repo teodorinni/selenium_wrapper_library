@@ -376,3 +376,14 @@ class WrappedElement:
 
     def wait_until_clickable_and_click(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
         self.wait_until_clickable(timeout).click()
+
+    def mouse_over_and_click(self):
+        self.mouse_over()
+        self.click()
+
+    def wait_for_visibility_and_click_js(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+        self.wait_for_visibility(timeout).click_js()
+
+    def mouse_over_and_click_js(self):
+        self.mouse_over()
+        self.click_js()
