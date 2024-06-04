@@ -33,6 +33,7 @@ class WrappedElement:
         logging.info(f"Double clicking the Element located by {self.__by}: '{self.__locator}'")
 
     def click_js(self):
+        self.wait_for_presence()
         self.execute_javascript("arguments[0].click();", self.__get_web_element())
         logging.info(f"JS clicking  the Element located by {self.__by}: '{self.__locator}'")
 
