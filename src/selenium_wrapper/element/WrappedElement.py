@@ -43,6 +43,10 @@ class WrappedElement:
         self.execute_javascript(script, self.__get_web_element())
         logging.info(f"Clicking the invisible Element located by {self.__by}: '{self.__locator}'")
 
+    def click_no_wait(self):
+        self.__get_web_driver_actions().click(self.__get_web_element()).perform()
+        logging.info(f"Clicking the Element located by {self.__by}: '{self.__locator}'")
+
     def mouse_over(self):
         self.wait_for_presence()
         self.__get_web_driver_actions().move_to_element(self.__get_web_element()).perform()
