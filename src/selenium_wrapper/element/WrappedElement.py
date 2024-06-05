@@ -137,6 +137,10 @@ class WrappedElement:
         self.__get_web_element().send_keys(*text)
         logging.info(f"Typing text: '{''.join(text)}' into the Element located by {self.__by}: '{self.__locator}'")
 
+    def send_keys_no_wait(self, *text):
+        self.__get_web_element().send_keys(*text)
+        logging.info(f"Typing text: '{''.join(text)}' into the Element located by {self.__by}: '{self.__locator}'")
+
     def switch_frame(self):
         self.__driver.switch_to.frame(self.__get_web_element())
         logging.info(f"Switching to the Frame located by {self.__by}: '{self.__locator}'")
