@@ -10,7 +10,7 @@ def retry_function_until_success(function, wait_time: float, retry_interval: flo
         try:
             function()
             return True
-        except Exception:
+        except:
             time.sleep(retry_interval)
         finally:
             return False
