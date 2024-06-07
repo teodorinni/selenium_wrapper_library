@@ -4,19 +4,13 @@ import platform
 from selenium.webdriver import Keys
 
 
-def retry_function_until_success(function, wait_time: float, retry_interval: float) -> bool:
-    remaining_time = wait_time
-    while remaining_time > 0:
+def retry_function_until_success(function, retry_interval: float, num_retries: int) -> bool:
+    for i in range(num_retries):
         try:
             function()
             return True
         except:
-            if remaining_time > retry_interval:
-                time.sleep(retry_interval)
-                remaining_time -= retry_interval
-            else:
-                time.sleep(remaining_time)
-                remaining_time = 0
+            time.sleep(retry_interval)
     return False
 
 
