@@ -309,7 +309,7 @@ class WrappedElement:
         logging.info(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be absent. "
             f"Timeout set to {timeout} seconds")
-        if not self.is_present():
+        if self.is_present():
             self.__get_web_driver_wait(timeout).until(
                 ec.staleness_of(self.__get_web_element()))
         return self
