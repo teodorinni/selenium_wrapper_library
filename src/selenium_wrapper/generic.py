@@ -1,6 +1,7 @@
 import time
 import platform
 
+from selenium.common import WebDriverException
 from selenium.webdriver import Keys
 
 
@@ -10,7 +11,7 @@ def retry_function_until_success(function, wait_time: float, retry_interval: flo
         try:
             function()
             return True
-        except:
+        except WebDriverException:
             time.sleep(retry_interval)
         finally:
             return False
