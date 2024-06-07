@@ -1,4 +1,6 @@
 import os
+from pathlib import Path
+
 import urllib3
 
 from selenium import webdriver
@@ -25,7 +27,9 @@ class WebDriverFactory:
         if browser == "chrome" or not browser:
             options = webdriver.ChromeOptions()
             options.add_argument("--disable-blink-features=AutomationControlled")
-            options.add_experimental_option("prefs", {"download.default_directory": os.getenv("DOWNLOAD_DIR")})
+            download_dir = Path(os.getenv("DOWNLOAD_DIR"))
+            download_dir.mkdir(parents=True, exist_ok=True)
+            options.add_experimental_option("prefs", {"download.default_directory": download_dir})
             if headless in ("true",  "1", "yes", "on", "enabled"):
                 options.add_argument("--headless=new")
             driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), options=options)
