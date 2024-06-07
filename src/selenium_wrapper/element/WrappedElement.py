@@ -8,7 +8,7 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
 from src.selenium_wrapper.webdriver.WebDriverSingleton import WebDriverSingleton
-from src.selenium_wrapper.generic import (get_control_or_command_for_current_os)
+from src.selenium_wrapper.generic import (get_control_or_command_for_current_os, retry_function_until_success)
 
 
 class WrappedElement:
@@ -397,3 +397,14 @@ class WrappedElement:
     def mouse_over_and_click_js(self):
         self.mouse_over()
         self.click_js()
+
+    def __click_element_and_wait_for_other_element_visibility(self, element_to_be_visible, timeout):
+        self.click_no_wait()
+        element_to_be_visible.wait_for_visibility(timeout)
+
+    def click_element_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement", retry_interval,
+                                                     num_retries):
+        retry_function_until_success(
+            lambda: self.__click_element_and_wait_for_other_element_visibility(self, element_to_be_visible),
+            retry_interval, num_retries)
+        return self
