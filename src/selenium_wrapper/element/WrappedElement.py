@@ -398,13 +398,13 @@ class WrappedElement:
         self.mouse_over()
         self.click_js()
 
-    def __click_element_and_wait_for_other_element_visibility(self, element_to_be_visible, retry_interval):
+    def __click__and_wait_for_other_element_visibility(self, element_to_be_visible, retry_interval):
         self.click_no_wait()
         element_to_be_visible.wait_for_visibility(retry_interval)
 
-    def click_element_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement",
-                                                     retry_interval: float, num_retries: int):
+    def click_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement", retry_interval: float,
+                                             num_retries: int):
         retry_function_until_success(
-            lambda: self.__click_element_and_wait_for_other_element_visibility(self, element_to_be_visible),
+            lambda: self.__click_and_wait_for_other_element_visibility(self, element_to_be_visible),
             retry_interval, num_retries)
         return self
