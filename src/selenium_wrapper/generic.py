@@ -15,7 +15,7 @@ def retry_function_until_success(function, wait_time: float, retry_interval: flo
                 time.sleep(retry_interval)
             else:
                 time.sleep(retry_interval)
-                remaining_time -= retry_interval
+            remaining_time -= retry_interval
     return False
 
 
