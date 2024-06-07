@@ -27,7 +27,7 @@ class WebDriverFactory:
         if browser == "chrome" or not browser:
             options = webdriver.ChromeOptions()
             options.add_argument("--disable-blink-features=AutomationControlled")
-            # Path(os.getenv("DOWNLOAD_DIR")).mkdir(parents=True, exist_ok=True)
+            print(os.getenv("DOWNLOAD_DIR"))
             options.add_experimental_option("prefs", {"download.default_directory": os.getenv("DOWNLOAD_DIR")})
             if headless in ("true",  "1", "yes", "on", "enabled"):
                 options.add_argument("--headless=new")
