@@ -405,6 +405,6 @@ class WrappedElement:
     def click_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement", retry_interval: float,
                                              num_retries: int):
         retry_function_until_success(
-            lambda: self.__click_and_wait_for_other_element_visibility(self, element_to_be_visible),
-            retry_interval, num_retries)
+            lambda: self.__click_and_wait_for_other_element_visibility(element_to_be_visible, retry_interval),
+            0, num_retries)
         return self
