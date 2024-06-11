@@ -22,20 +22,24 @@ class WrappedElement:
 
     # Actions
 
-    def click(self):
-        self.wait_for_presence()
+    def click_no_wait(self):
         self.__get_web_driver_actions().click(self.__get_web_element()).perform()
         logging.info(f"Clicking the Element located by {self.__by}: '{self.__locator}'")
+
+    def click(self):
+        self.wait_for_presence().click_no_wait()
 
     def double_click(self):
         self.wait_for_presence()
         self.__get_web_driver_actions().double_click(self.__get_web_element()).perform()
         logging.info(f"Double clicking the Element located by {self.__by}: '{self.__locator}'")
 
-    def click_js(self):
-        self.wait_for_presence()
+    def click_js_no_wait(self):
         self.execute_javascript("arguments[0].click();", self.__get_web_element())
         logging.info(f"JS clicking  the Element located by {self.__by}: '{self.__locator}'")
+
+    def click_js(self):
+        self.wait_for_presence().click_js_no_wait()
 
     def click_invisible_element(self):
         script: str = ("var object = arguments[0];var theEvent = document.createEvent(\"MouseEvent\");"
@@ -43,10 +47,6 @@ class WrappedElement:
                        "false, 0, null);object.dispatchEvent(theEvent);")
         self.execute_javascript(script, self.__get_web_element())
         logging.info(f"Clicking the invisible Element located by {self.__by}: '{self.__locator}'")
-
-    def click_no_wait(self):
-        self.__get_web_driver_actions().click(self.__get_web_element()).perform()
-        logging.info(f"Clicking the Element located by {self.__by}: '{self.__locator}'")
 
     def mouse_over(self):
         self.wait_for_presence()
@@ -414,7 +414,7 @@ class WrappedElement:
     def __click_and_wait_for_other_element_invisibility(self, element_to_be_invisible: "WrappedElement",
                                                         retry_interval: float):
         self.click_no_wait()
-        element_to_be_invisible.wait_for_absence(retry_interval)
+        element_to_be_invisible.wait_for_invisibility(retry_interval)
 
     def click_until_other_element_is_invisible(self, element_to_be_invisible: "WrappedElement", retry_interval: float,
                                                num_retries: int):
@@ -425,3 +425,27 @@ class WrappedElement:
 
     def wait_until_clickable_and_click_js(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
         self.wait_until_clickable(timeout).click_js()
+
+    def __click_js_and_wait_for_other_element_visibility(self, element_to_be_visible: "WrappedElement",
+                                                         retry_interval: float):
+        self.click_js_no_wait()
+        element_to_be_visible.wait_for_visibility(retry_interval)
+
+    def click_js_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement", retry_interval: float,
+                                                num_retries: int):
+        retry_function_until_success(
+            lambda: self.__click_js_and_wait_for_other_element_visibility(element_to_be_visible, retry_interval),
+            0, num_retries)
+        return self
+
+    def __click_js_and_wait_for_other_element_invisibility(self, element_to_be_invisible: "WrappedElement",
+                                                           retry_interval: float):
+        self.click_no_wait()
+        element_to_be_invisible.wait_for_absence(retry_interval)
+
+    def click_js_until_other_element_is_invisible(self, element_to_be_invisible: "WrappedElement",
+                                                  retry_interval: float, num_retries: int):
+        retry_function_until_success(
+            lambda: self.__click_js_and_wait_for_other_element_invisibility(element_to_be_invisible, retry_interval),
+            0, num_retries)
+        return self
