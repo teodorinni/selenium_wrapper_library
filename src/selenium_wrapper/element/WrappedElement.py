@@ -422,3 +422,6 @@ class WrappedElement:
             lambda: self.__click_and_wait_for_other_element_invisibility(element_to_be_invisible, retry_interval),
             0, num_retries)
         return self
+
+    def wait_until_clickable_and_click_js(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+        self.wait_until_clickable(timeout).click_js()

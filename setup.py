@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
    name='selenium_wrapper',
-   version='1.0.38',
+   version='1.0.39',
    description='Wrapper for Selenium Webdriver',
    author='Fedor Nesterovich',
    author_email='fnesterovich@mfsadmin.com',
