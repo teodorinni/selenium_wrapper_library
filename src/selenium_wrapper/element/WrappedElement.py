@@ -441,7 +441,7 @@ class WrappedElement:
     def __click_js_and_wait_for_other_element_invisibility(self, element_to_be_invisible: "WrappedElement",
                                                            retry_interval: float):
         self.click_no_wait()
-        element_to_be_invisible.wait_for_absence(retry_interval)
+        element_to_be_invisible.wait_for_invisibility(retry_interval)
 
     def click_js_until_other_element_is_invisible(self, element_to_be_invisible: "WrappedElement",
                                                   retry_interval: float, num_retries: int):
