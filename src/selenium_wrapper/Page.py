@@ -159,7 +159,7 @@ class Page:
 
     def wait_for_ajax_requests_to_finish(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
         logging.info("Waiting for all Ajax queries to finish")
-        return self.__get_web_driver_wait(timeout).until(lambda d: d.execute_script("return document.readyState != 'complete'"))
+        return self.__get_web_driver_wait(timeout).until(lambda d: d.execute_script("return document.readyState == 'complete'"))
 
     # WebDriver related
     @staticmethod
