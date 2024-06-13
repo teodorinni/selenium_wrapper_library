@@ -369,16 +369,11 @@ class WrappedElement:
 
     # WebDriver related
     def __get_web_element(self) -> WebElement:
-        try:
-            if self.__web_element is None:
-                logging.info(f"Locating Element by {self.__by}: {self.__locator}")
-                return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
-            else:
-                return self.__web_element
-        except (NoSuchElementException, JavascriptException) as e:
-            sys.tracebacklimit = 0
-            raise NoSuchElementException(f"Unable to locate an element with the {self.__by}: {self.__locator}"
-                                         f" in the current page!") from e
+        if self.__web_element is None:
+            logging.info(f"Locating Element by {self.__by}: {self.__locator}")
+            return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
+        else:
+            return self.__web_element
 
     @staticmethod
     def __get_web_driver_wait(timeout=__DEFAULT_TIME_OUT_SECONDS) -> WebDriverWait:
