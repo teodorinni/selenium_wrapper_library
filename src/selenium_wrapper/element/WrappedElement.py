@@ -373,8 +373,8 @@ class WrappedElement:
             else:
                 return self.__web_element
         except NoSuchElementException or JavascriptException as e:
-            e.msg = f"The element located by {self.__by}: {self.__locator} is not present in the current page!"
-            raise
+            e.msg = f"Unable to locate an element with the {self.__by}: {self.__locator} in the current page!"
+            raise e
 
     @staticmethod
     def __get_web_driver_wait(timeout=__DEFAULT_TIME_OUT_SECONDS) -> WebDriverWait:
