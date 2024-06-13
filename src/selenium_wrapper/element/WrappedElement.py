@@ -378,7 +378,7 @@ class WrappedElement:
         except (NoSuchElementException, JavascriptException) as e:
             sys.tracebacklimit = 0
             raise NoSuchElementException(f"Unable to locate an element with the {self.__by}: {self.__locator}"
-                                         f" in the current page!").with_traceback(None) from e
+                                         f" in the current page!") from e
 
     @staticmethod
     def __get_web_driver_wait(timeout=__DEFAULT_TIME_OUT_SECONDS) -> WebDriverWait:
