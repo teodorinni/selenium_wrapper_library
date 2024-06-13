@@ -1,5 +1,6 @@
 import logging
 import os
+import traceback
 
 from selenium.common import NoSuchElementException, JavascriptException
 from selenium.webdriver import ActionChains, Keys
@@ -373,6 +374,7 @@ class WrappedElement:
             else:
                 return self.__web_element
         except (NoSuchElementException, JavascriptException) as e:
+            traceback.print_exc(limit=1)
             raise NoSuchElementException(f"Unable to locate an element with the {self.__by}: {self.__locator}"
                                          f" in the current page!") from e
 
