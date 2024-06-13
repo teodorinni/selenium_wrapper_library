@@ -1,7 +1,7 @@
 import logging
 import os
 
-from selenium.common import NoSuchElementException
+from selenium.common import NoSuchElementException, JavascriptException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
@@ -372,7 +372,7 @@ class WrappedElement:
                 return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
             else:
                 return self.__web_element
-        except NoSuchElementException as e:
+        except NoSuchElementException or JavascriptException as e:
             e.msg = f"The element located by {self.__by}: {self.__locator} is not present in the current page!"
             raise
 
