@@ -369,7 +369,8 @@ class WrappedElement:
         try:
             if self.__web_element is None:
                 logging.info(f"Locating Element by {self.__by}: {self.__locator}")
-                return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
+                webelement = WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
+                return webelement
             else:
                 return self.__web_element
         except NoSuchElementException or JavascriptException as e:
