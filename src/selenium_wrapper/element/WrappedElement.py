@@ -376,6 +376,7 @@ class WrappedElement:
             else:
                 return self.__web_element
         except (NoSuchElementException, JavascriptException) as e:
+            sys.tracebacklimit = 0
             raise NoSuchElementException(f"Unable to locate an element with the {self.__by}: {self.__locator}"
                                          f" in the current page!").with_traceback(None) from e
 
