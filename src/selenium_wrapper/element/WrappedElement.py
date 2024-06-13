@@ -257,7 +257,7 @@ class WrappedElement:
 
     # Waits
 
-    def wait_for_presence(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_presence(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.debug(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be present. "
             f"Timeout set to {timeout} seconds")
@@ -265,7 +265,7 @@ class WrappedElement:
             ec.presence_of_element_located(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_attribute_in_element(self, attribute: str, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_attribute_in_element(self, attribute: str, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for the attribute '{attribute}' to be included in the Element located by {self.__by}: "
             f"'{self.__locator}'. Timeout set to {timeout} seconds")
@@ -273,7 +273,7 @@ class WrappedElement:
             ec.element_attribute_to_include(self.__get_element_by_and_locator(), attribute))
         return self
 
-    def wait_until_selected(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_until_selected(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be selected. "
             f"Timeout set to {timeout} seconds")
@@ -281,7 +281,7 @@ class WrappedElement:
             ec.element_located_to_be_selected(self.__get_element_by_and_locator()))
         return self
 
-    def wait_until_clickable(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_until_clickable(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be clickable. "
             f"Timeout set to {timeout} seconds")
@@ -289,7 +289,7 @@ class WrappedElement:
             ec.element_to_be_clickable(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_visibility(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_visibility(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be visible. "
             f"Timeout set to {timeout} seconds")
@@ -297,7 +297,7 @@ class WrappedElement:
             ec.visibility_of_element_located(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_invisibility(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_invisibility(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be invisible. "
             f"Timeout set to {timeout} seconds")
@@ -305,17 +305,17 @@ class WrappedElement:
             ec.invisibility_of_element_located(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_absence(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_absence(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         try:
             logging.info(
                 f"Waiting for the Element located by {self.__by}: '{self.__locator}' to be absent. "
                 f"Timeout set to {timeout} seconds")
             self.__get_web_driver_wait(timeout).until(ec.staleness_of(self.__get_web_element()))
         except NoSuchElementException:
-            pass
+            return self
         return self
 
-    def wait_until_text_is_present_in_element(self, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_until_text_is_present_in_element(self, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for text '{text}' to be present in the Element located by {self.__by}: '{self.__locator}'. "
             f"Timeout set to {timeout} seconds")
@@ -323,7 +323,8 @@ class WrappedElement:
             ec.text_to_be_present_in_element(self.__get_element_by_and_locator(), text))
         return self
 
-    def wait_until_text_is_present_in_attribute(self, attribute: str, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_until_text_is_present_in_attribute(self, attribute: str, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS)\
+            -> "WrappedElement":
         logging.info(
             f"Waiting for text '{text}' to be present in the attribute '{attribute}' of the Element located by "
             f"{self.__by}: '{self.__locator}'. Timeout set to {timeout} seconds")
@@ -331,7 +332,7 @@ class WrappedElement:
             ec.text_to_be_present_in_element_attribute(self.__get_element_by_and_locator(), attribute, text))
         return self
 
-    def wait_until_text_is_present_in_value(self, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_until_text_is_present_in_value(self, text: str, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for text '{text}' to be present in the value of the Element located by {self.__by}: "
             f"'{self.__locator}'. Timeout set to {timeout} seconds")
@@ -339,7 +340,7 @@ class WrappedElement:
             ec.text_to_be_present_in_element_value(self.__get_element_by_and_locator(), text))
         return self
 
-    def wait_for_visibility_of_all_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_visibility_of_all_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting all Elements located by {self.__by}: '{self.__locator}' to be visible. Timeout set to {timeout} "
             f"seconds")
@@ -347,7 +348,7 @@ class WrappedElement:
             ec.visibility_of_all_elements_located(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_presence_of_all_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_presence_of_all_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for all Elements located by {self.__by}: '{self.__locator}' to be present. "
             f"Timeout set to {timeout} seconds")
@@ -355,7 +356,7 @@ class WrappedElement:
             ec.presence_of_all_elements_located(self.__get_element_by_and_locator()))
         return self
 
-    def wait_for_visibility_of_any_of_the_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS):
+    def wait_for_visibility_of_any_of_the_elements(self, timeout=__DEFAULT_TIME_OUT_SECONDS) -> "WrappedElement":
         logging.info(
             f"Waiting for all Elements located by {self.__by}: '{self.__locator}' to be visible. "
             f"Timeout set to {timeout} seconds")
@@ -365,11 +366,15 @@ class WrappedElement:
 
     # WebDriver related
     def __get_web_element(self) -> WebElement:
-        if self.__web_element is None:
-            logging.info(f"Locating Element by {self.__by}: {self.__locator}")
-            return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
-        else:
-            return self.__web_element
+        try:
+            if self.__web_element is None:
+                logging.info(f"Locating Element by {self.__by}: {self.__locator}")
+                return WebDriverSingleton.get_driver().find_element(self.__by, self.__locator)
+            else:
+                return self.__web_element
+        except NoSuchElementException as e:
+            e.msg = f"The element located by {self.__by}: {self.__locator} is not present in the current page!"
+            raise
 
     @staticmethod
     def __get_web_driver_wait(timeout=__DEFAULT_TIME_OUT_SECONDS) -> WebDriverWait:
@@ -432,7 +437,7 @@ class WrappedElement:
         element_to_be_visible.wait_for_visibility(retry_interval)
 
     def click_js_until_other_element_is_visible(self, element_to_be_visible: "WrappedElement", retry_interval: float,
-                                                num_retries: int):
+                                                num_retries: int) -> "WrappedElement":
         retry_function_until_success(
             lambda: self.__click_js_and_wait_for_other_element_visibility(element_to_be_visible, retry_interval),
             0, num_retries)
@@ -444,7 +449,7 @@ class WrappedElement:
         element_to_be_invisible.wait_for_invisibility(retry_interval)
 
     def click_js_until_other_element_is_invisible(self, element_to_be_invisible: "WrappedElement",
-                                                  retry_interval: float, num_retries: int):
+                                                  retry_interval: float, num_retries: int) -> "WrappedElement":
         retry_function_until_success(
             lambda: self.__click_js_and_wait_for_other_element_invisibility(element_to_be_invisible, retry_interval),
             0, num_retries)
