@@ -237,7 +237,8 @@ class WrappedElement:
         return is_element_clickable
 
     def is_selected(self) -> bool:
-        is_element_selected = self.wait_for_presence().is_selected()
+        self.wait_for_presence()
+        is_element_selected = self.__get_web_element().is_selected()
         logging.info(f"Checking if the Element located by {self.__by} '{self.__locator}' is selected. "
                      f"Returning {is_element_selected}")
         return is_element_selected

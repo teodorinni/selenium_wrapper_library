@@ -1,6 +1,7 @@
 import logging
 import os
 
+from selenium.webdriver import ActionChains
 from selenium.webdriver.common.alert import Alert
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support.wait import WebDriverWait
@@ -41,7 +42,6 @@ class Page:
     def go_forward(self):
         logging.info("Going forward to the next page")
         self.__driver.forward()
-        return self
 
     def get_cookies(self) -> list[dict]:
         logging.info("Getting cookies")
@@ -88,6 +88,10 @@ class Page:
         logging.info("Scrolling the current page to bottom")
         return self.execute_javascript("window.scrollTo(0, document.body.scrollHeight)")
 
+    def scroll_by_offset(self, xoffset: int, yoffset: int):
+        self.__get_web_driver_actions().scroll_by_amount(xoffset, yoffset).perform()
+        logging.info(f"Scrolling the page by X offset: {xoffset}, Y offset: {yoffset}")
+
     def open_page_in_new_tab(self, url: str):
         logging.info(f"Opening page in new tab with URL: {url}")
         return self.execute_javascript("window.open('{}');".format(url))
@@ -99,6 +103,8 @@ class Page:
             self.__driver.switch_to.window(all_windows[len(all_windows) - 1])
             self.__driver.close()
             self.__driver.switch_to.window(all_windows[len(all_windows) - 2])
+
+    # Alerts
 
     def accept_alert(self):
         logging.info("Accepting the alert")
@@ -165,3 +171,7 @@ class Page:
     @staticmethod
     def _get_web_driver() -> WebDriver:
         return WebDriverSingleton.get_driver()
+
+    @staticmethod
+    def __get_web_driver_actions() -> ActionChains:
+        return ActionChains(WebDriverSingleton.get_driver())
