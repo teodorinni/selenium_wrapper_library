@@ -1,10 +1,7 @@
 import logging
 import os
-import sys
-import traceback
-import types
 
-from selenium.common import NoSuchElementException, JavascriptException
+from selenium.common import NoSuchElementException
 from selenium.webdriver import ActionChains, Keys
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
