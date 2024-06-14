@@ -85,12 +85,12 @@ class WrappedElement:
 
     def key_down(self, key: Keys):
         self.wait_for_presence()
-        self.__get_web_driver_actions().key_down(str(key))
+        self.__get_web_driver_actions().key_down(str(key), self.__get_web_element())
         logging.info(f"Pressing and holding the key: '{key}' on the Element located by {self.__by}: '{self.__locator}'")
 
     def key_up(self, key: Keys):
         self.wait_for_presence()
-        self.__get_web_driver_actions().key_up(str(key))
+        self.__get_web_driver_actions().key_up(str(key), self.__get_web_element())
         logging.info(f"Releasing the key: '{key}' from the Element located by {self.__by}: '{self.__locator}'")
 
     def perform(self):
@@ -101,13 +101,12 @@ class WrappedElement:
 
     def move_by_offset(self, xoffset: int, yoffset: int):
         self.wait_for_presence()
-        self.__get_web_driver_actions().move_by_offset(xoffset, yoffset).perform()
+        self.__get_web_driver_actions().move_by_offset(xoffset, yoffset)
         logging.info(f"Moving the mouse by X offset: {xoffset}, Y offset: {yoffset}")
 
     def move_to_element_with_offset(self, element: "WrappedElement", xoffset: int, yoffset: int):
         self.wait_for_presence()
-        (self.__get_web_driver_actions().move_to_element_with_offset(element.__get_web_element(), xoffset, yoffset)
-         .perform())
+        self.__get_web_driver_actions().move_to_element_with_offset(element.__get_web_element(), xoffset, yoffset)
         logging.info(f"Moving the mouse to the Element located by {self.__by}: '{self.__locator}' with "
                      f"X offset: {xoffset}, Y offset: {yoffset}")
 
